@@ -65,6 +65,9 @@
                 padding: 6px;
                 margin-bottom: 12px;
             }
+            .input-email {
+                margin-bottom: 22px;
+            }
             .primary-button {
                 background-color: var(--hospital-green);
                 border-radius: 8px;
@@ -80,11 +83,12 @@
                 margin-top: 14px;
                 margin-bottom: 30px;
             }
-            a.forgot-pwd {
+            .form a {
                 text-decoration: none;
                 text-align: center;
                 font-size: var(--sm);
                 color: var(--hospital-green);
+                margin-bottom: 52px;
             }
             .secondary-button {
                 width: 300px;
@@ -101,6 +105,13 @@
                 .logo {
                     display: block;
                 }
+                .login {
+                    position: relative;
+                }
+                .secondary-button {
+                    position: absolute;
+                    bottom: 3%;
+                }
             }
         </style>
     </head>
@@ -113,8 +124,8 @@
                     <input
                         type="email"
                         id="email"
-                        placeholder="camilayokoo@gmail.com"
-                        class="input input-password"
+                        placeholder="platzi@example.com"
+                        class="input input-email"
                     />
 
                     <label for="password" class="label">Password</label>
@@ -130,11 +141,12 @@
                         value="Log in"
                         class="primary-button login-button"
                     />
-                </form>
-                <a href="#" class="forgot-pwd">Forgot my password</a>
-            </div>
 
-            <button class="secondary-button">Sign up</button>
+                    <a href="#">Forgot my password</a>
+                </form>
+
+                <button class="secondary-button signup-button">Sign up</button>
+            </div>
         </div>
     </body>
 </html>
