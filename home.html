@@ -7,7 +7,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
-            href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&family=Roboto:wght@700&display=swap"
             rel="stylesheet"
         />
         <title>Document</title>
@@ -21,10 +21,51 @@
                 --sm: 14px;
                 --md: 16px;
                 --lg: 18px;
+                --card-size: 175px;
             }
             body {
                 margin: 0;
                 font-family: 'Quicksand', sans-serif;
+            }
+            .cards-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, var(--card-size));
+                gap: 26px;
+                place-content: center;
+            }
+            .product-card {
+                width: var(--card-size);
+            }
+            .item-picture {
+                margin: 0;
+                width: var(--card-size);
+                height: var(--card-size);
+            }
+            .product-img {
+                object-fit: contain;
+                width: 100%;
+                height: 100%;
+                border-radius: 20px;
+            }
+            .item-content {
+                margin-top: 8px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .item-price {
+                font-family: 'Roboto', sans-serif;
+                font-size: var(--md);
+                margin: 0;
+            }
+            .item-name {
+                font-size: var(--sm);
+                color: var(--very-light-pink);
+                margin-top: 2px;
+                margin-bottom: 0px;
+            }
+            .btn-container {
+                display: inline-block;
             }
         </style>
     </head>
@@ -32,202 +73,222 @@
         <section class="main-container">
             <div class="cards-container">
                 <div class="product-card">
-                    <img
-                        src="./assets/images/round_shelf.png"
-                        alt="Round shelf"
-                        class="product-img"
-                    />
-                    <div>
+                    <figure class="item-picture">
+                        <img
+                            src="./assets/images/round_shelf.png"
+                            alt="Round shelf"
+                            class="product-img"
+                        />
+                    </figure>
+                    <div class="item-content">
                         <div>
-                            <p>$ 120,00</p>
-                            <p>Round shelf</p>
+                            <p class="item-price">$ 120,00</p>
+                            <p class="item-name">Round shelf</p>
                         </div>
-                        <figure>
+                        <a href="#" class="btn-container">
                             <img
                                 src="./assets/icons/bt_add_to_cart.svg"
                                 alt="Add to cart"
                             />
-                        </figure>
+                        </a>
                     </div>
                 </div>
 
                 <div class="product-card">
-                    <img
-                        src="./assets/images/retro_refrigerator.png"
-                        alt="Retro refrigerator"
-                        class="product-img"
-                    />
-                    <div>
+                    <figure class="item-picture">
+                        <img
+                            src="./assets/images/retro_refrigerator.png"
+                            alt="Retro refrigerator"
+                            class="product-img"
+                        />
+                    </figure>
+                    <div class="item-content">
                         <div>
-                            <p>$ 120,00</p>
-                            <p>Retro refrigerator</p>
+                            <p class="item-price">$ 120,00</p>
+                            <p class="item-name">Retro refrigerator</p>
                         </div>
-                        <figure>
+                        <a href="#" class="btn-container">
                             <img
                                 src="./assets/icons/bt_add_to_cart.svg"
                                 alt="Add to cart"
                             />
-                        </figure>
+                        </a>
                     </div>
                 </div>
 
                 <div class="product-card">
-                    <img
-                        src="./assets/images/round_shelf.png"
-                        alt="Round shelf"
-                        class="product-img"
-                    />
-                    <div>
+                    <figure class="item-picture">
+                        <img
+                            src="./assets/images/round_shelf.png"
+                            alt="Round shelf"
+                            class="product-img"
+                        />
+                    </figure>
+                    <div class="item-content">
                         <div>
-                            <p>$ 120,00</p>
-                            <p>Round shelf</p>
+                            <p class="item-price">$ 120,00</p>
+                            <p class="item-name">Round shelf</p>
                         </div>
-                        <figure>
+                        <a href="#" class="btn-container">
                             <img
                                 src="./assets/icons/bt_add_to_cart.svg"
                                 alt="Add to cart"
                             />
-                        </figure>
+                        </a>
                     </div>
                 </div>
 
                 <div class="product-card">
-                    <img
-                        src="./assets/images/retro_refrigerator.png"
-                        alt="Retro refrigerator"
-                        class="product-img"
-                    />
-                    <div>
+                    <figure class="item-picture">
+                        <img
+                            src="./assets/images/retro_refrigerator.png"
+                            alt="Retro refrigerator"
+                            class="product-img"
+                        />
+                    </figure>
+                    <div class="item-content">
                         <div>
-                            <p>$ 120,00</p>
-                            <p>Retro refrigerator</p>
+                            <p class="item-price">$ 120,00</p>
+                            <p class="item-name">Retro refrigerator</p>
                         </div>
-                        <figure>
+                        <a href="#" class="btn-container">
                             <img
                                 src="./assets/icons/bt_add_to_cart.svg"
                                 alt="Add to cart"
                             />
-                        </figure>
+                        </a>
                     </div>
                 </div>
 
                 <div class="product-card">
-                    <img
-                        src="./assets/images/round_shelf.png"
-                        alt="Round shelf"
-                        class="product-img"
-                    />
-                    <div>
+                    <figure class="item-picture">
+                        <img
+                            src="./assets/images/round_shelf.png"
+                            alt="Round shelf"
+                            class="product-img"
+                        />
+                    </figure>
+                    <div class="item-content">
                         <div>
-                            <p>$ 120,00</p>
-                            <p>Round shelf</p>
+                            <p class="item-price">$ 120,00</p>
+                            <p class="item-name">Round shelf</p>
                         </div>
-                        <figure>
+                        <a href="#" class="btn-container">
                             <img
                                 src="./assets/icons/bt_add_to_cart.svg"
                                 alt="Add to cart"
                             />
-                        </figure>
+                        </a>
                     </div>
                 </div>
 
                 <div class="product-card">
-                    <img
-                        src="./assets/images/round_shelf.png"
-                        alt="Round shelf"
-                        class="product-img"
-                    />
-                    <div>
+                    <figure class="item-picture">
+                        <img
+                            src="./assets/images/round_shelf.png"
+                            alt="Round shelf"
+                            class="product-img"
+                        />
+                    </figure>
+                    <div class="item-content">
                         <div>
-                            <p>$ 120,00</p>
-                            <p>Round shelf</p>
+                            <p class="item-price">$ 120,00</p>
+                            <p class="item-name">Round shelf</p>
                         </div>
-                        <figure>
+                        <a href="#" class="btn-container">
                             <img
                                 src="./assets/icons/bt_add_to_cart.svg"
                                 alt="Add to cart"
                             />
-                        </figure>
+                        </a>
                     </div>
                 </div>
 
                 <div class="product-card">
-                    <img
-                        src="./assets/images/retro_refrigerator.png"
-                        alt="Retro refrigerator"
-                        class="product-img"
-                    />
-                    <div>
+                    <figure class="item-picture">
+                        <img
+                            src="./assets/images/retro_refrigerator.png"
+                            alt="Retro refrigerator"
+                            class="product-img"
+                        />
+                    </figure>
+                    <div class="item-content">
                         <div>
-                            <p>$ 120,00</p>
-                            <p>Retro refrigerator</p>
+                            <p class="item-price">$ 120,00</p>
+                            <p class="item-name">Retro refrigerator</p>
                         </div>
-                        <figure>
+                        <a href="#" class="btn-container">
                             <img
                                 src="./assets/icons/bt_add_to_cart.svg"
                                 alt="Add to cart"
                             />
-                        </figure>
+                        </a>
                     </div>
                 </div>
 
                 <div class="product-card">
-                    <img
-                        src="./assets/images/round_shelf.png"
-                        alt="Round shelf"
-                        class="product-img"
-                    />
-                    <div>
+                    <figure class="item-picture">
+                        <img
+                            src="./assets/images/round_shelf.png"
+                            alt="Round shelf"
+                            class="product-img"
+                        />
+                    </figure>
+                    <div class="item-content">
                         <div>
-                            <p>$ 120,00</p>
-                            <p>Round shelf</p>
+                            <p class="item-price">$ 120,00</p>
+                            <p class="item-name">Round shelf</p>
                         </div>
-                        <figure>
+                        <a href="#" class="btn-container">
                             <img
                                 src="./assets/icons/bt_add_to_cart.svg"
                                 alt="Add to cart"
                             />
-                        </figure>
+                        </a>
                     </div>
                 </div>
 
                 <div class="product-card">
-                    <img
-                        src="./assets/images/retro_refrigerator.png"
-                        alt="Retro refrigerator"
-                        class="product-img"
-                    />
-                    <div>
+                    <figure class="item-picture">
+                        <img
+                            src="./assets/images/retro_refrigerator.png"
+                            alt="Retro refrigerator"
+                            class="product-img"
+                        />
+                    </figure>
+                    <div class="item-content">
                         <div>
-                            <p>$ 120,00</p>
-                            <p>Retro refrigerator</p>
+                            <p class="item-price">$ 120,00</p>
+                            <p class="item-name">Retro refrigerator</p>
                         </div>
-                        <figure>
+                        <a href="#" class="btn-container">
                             <img
                                 src="./assets/icons/bt_add_to_cart.svg"
                                 alt="Add to cart"
                             />
-                        </figure>
+                        </a>
                     </div>
                 </div>
 
                 <div class="product-card">
-                    <img
-                        src="./assets/images/round_shelf.png"
-                        alt="Round shelf"
-                        class="product-img"
-                    />
-                    <div>
+                    <figure class="item-picture">
+                        <img
+                            src="./assets/images/round_shelf.png"
+                            alt="Round shelf"
+                            class="product-img"
+                        />
+                    </figure>
+                    <div class="item-content">
                         <div>
-                            <p>$ 120,00</p>
-                            <p>Round shelf</p>
+                            <p class="item-price">$ 120,00</p>
+                            <p class="item-name">Round shelf</p>
                         </div>
-                        <figure>
+                        <a href="#" class="btn-container">
                             <img
                                 src="./assets/icons/bt_add_to_cart.svg"
                                 alt="Add to cart"
                             />
-                        </figure>
+                        </a>
                     </div>
                 </div>
             </div>
