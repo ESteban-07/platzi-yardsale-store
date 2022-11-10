@@ -22,193 +22,57 @@
                 --md: 16px;
                 --lg: 18px;
                 --card-size: 240px;
-                --light-gray: #848484;
-                --dark-gray: #404040;
-                --dark: #232830;
             }
             body {
                 margin: 0;
                 font-family: 'Quicksand', sans-serif;
             }
-            .my-order {
-                display: grid;
-                justify-content: center;
-                align-content: center;
-                grid-auto-rows: min-content;
-                width: 100%;
-                height: 100%;
-            }
-            .my-order-title {
-                font-size: var(--lg);
-                font-weight: bold;
-                margin: 36px 0;
-            }
-            .my-order-wrapper {
-                width: 405px;
-                display: flex;
-                flex-direction: column;
-                row-gap: 24px;
-                margin-bottom: 24px;
-            }
-            .my-order-container {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 20px;
-                border-radius: 10px;
-                background-color: var(--text-input-field);
-            }
-            .my-order-container p {
-                margin: 0;
-            }
-            .my-order-container p:nth-child(1) {
-                display: flex;
-                flex-direction: column;
-            }
-            .my-order-container p:nth-child(1) span:nth-child(1) {
-                color: var(--black);
-                font-size: var(--md);
-                font-weight: bold;
-            }
-            .my-order-container p:nth-child(1) span:nth-child(2) {
-                color: var(--light-gray);
-                font-size: var(--sm);
-                margin-top: 2px;
-            }
-            .my-order-container p:nth-child(2) span {
-                color: var(--dark-gray);
-                font-family: 'Roboto', sans-serif;
-                font-size: var(--md);
-                font-weight: bold;
-            }
-            .shopping-cart {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
-            .shopping-cart figure {
-                display: flex;
-                align-items: center;
-                column-gap: 18px;
-                margin: 0;
-            }
-            .shopping-cart figure img {
-                width: 80px;
-                height: 80px;
-                object-fit: cover;
-                border-radius: 20px;
-            }
-            .shopping-cart figure figcaption {
-                color: var(--light-gray);
-                font-size: var(--sm);
-            }
-            .shopping-cart .product-price {
-                color: var(--dark-gray);
-                font-family: 'Roboto', sans-serif;
-                font-size: var(--md);
-                font-weight: bold;
-                margin: 0;
-            }
-            @media (max-width: 640px) {
-                .my-order {
-                    align-content: flex-start;
-                    justify-items: center;
-                }
-                .my-order-wrapper {
-                    width: 325px;
-                }
-                .shopping-cart .product-price {
-                    padding-right: 20px;
-                }
-            }
-            @media (max-width: 320px) {
-                .my-order-wrapper {
-                    width: 300px;
-                }
-                .shopping-cart figure {
-                    column-gap: 8px;
-                }
-            }
         </style>
     </head>
     <body>
         <div class="my-order">
-            <h2 class="my-order-title">My order</h2>
-            <div class="my-order-wrapper">
-                <div class="my-order-container">
+            <div class="my-order-container">
+                <h1 class="title">My order</h1>
+
+                <div class="my-order-content">
                     <p>
                         <span>04.25.2021</span>
                         <span>6 articles</span>
                     </p>
-                    <p>
-                        <span>$ 560.00</span>
-                    </p>
+                    <p>$ 560.00</p>
                 </div>
 
                 <div class="shopping-cart">
                     <figure>
                         <img
-                            src="./assets/images/round_shelf.png"
-                            alt="Round Shelf"
+                            src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                            alt="bike"
                         />
-                        <figcaption>Round Shelf</figcaption>
                     </figure>
-                    <p class="product-price">$ 120,00</p>
+                    <p>Bike</p>
+                    <p>$30,00</p>
                 </div>
 
                 <div class="shopping-cart">
                     <figure>
                         <img
-                            src="./assets/images/round_shelf.png"
-                            alt="Round Shelf"
+                            src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                            alt="bike"
                         />
-                        <figcaption>Round Shelf</figcaption>
                     </figure>
-                    <p class="product-price">$ 120,00</p>
+                    <p>Bike</p>
+                    <p>$30,00</p>
                 </div>
 
                 <div class="shopping-cart">
                     <figure>
                         <img
-                            src="./assets/images/round_shelf.png"
-                            alt="Round Shelf"
+                            src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                            alt="bike"
                         />
-                        <figcaption>Round Shelf</figcaption>
                     </figure>
-                    <p class="product-price">$ 120,00</p>
-                </div>
-
-                <div class="shopping-cart">
-                    <figure>
-                        <img
-                            src="./assets/images/round_shelf.png"
-                            alt="Round Shelf"
-                        />
-                        <figcaption>Round Shelf</figcaption>
-                    </figure>
-                    <p class="product-price">$ 120,00</p>
-                </div>
-
-                <div class="shopping-cart">
-                    <figure>
-                        <img
-                            src="./assets/images/round_shelf.png"
-                            alt="Round Shelf"
-                        />
-                        <figcaption>Round Shelf</figcaption>
-                    </figure>
-                    <p class="product-price">$ 120,00</p>
-                </div>
-
-                <div class="shopping-cart">
-                    <figure>
-                        <img
-                            src="./assets/images/round_shelf.png"
-                            alt="Round Shelf"
-                        />
-                        <figcaption>Round Shelf</figcaption>
-                    </figure>
-                    <p class="product-price">$ 120,00</p>
+                    <p>Bike</p>
+                    <p>$30,00</p>
                 </div>
             </div>
         </div>
