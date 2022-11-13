@@ -22,6 +22,7 @@
                 --md: 16px;
                 --lg: 18px;
                 --card-size: 240px;
+                --item-size: 360px;
             }
             body {
                 margin: 0;
@@ -30,7 +31,9 @@
             .product-detail {
                 position: absolute;
                 right: 0;
-                width: 360px;
+                width: var(--item-size);
+                box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.119789);
+                border-bottom-left-radius: 5px;
             }
             .product-detail-close {
                 position: absolute;
@@ -57,7 +60,7 @@
                 border-bottom-right-radius: 20px;
             }
             .product-info {
-                margin: 24px;
+                margin: 4px 24px 24px;
             }
             .product-info p:nth-child(1) {
                 font-size: var(--lg);
@@ -97,9 +100,112 @@
             .add-to-cart-button img {
                 filter: invert(1);
             }
+
+            /* slider */
+
+            .slider {
+                position: relative;
+                width: var(--item-size);
+                height: auto;
+                overflow: hidden;
+            }
+
+            .slides {
+                position: relative;
+                width: 500%;
+                height: 100%;
+                display: flex;
+            }
+
+            .slides input {
+                display: none;
+            }
+
+            .slide {
+                width: 20%;
+                transition: 2s;
+            }
+
+            .slide img {
+                width: var(--item-size);
+                height: 360px;
+                object-fit: cover;
+                border-bottom-left-radius: 20px;
+                border-bottom-right-radius: 20px;
+            }
+
+            /*css for manual slide navigation*/
+
+            .navigation-manual {
+                width: var(--item-size);
+                height: 10px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 8px;
+                margin-bottom: 10px;
+            }
+
+            .manual-btn {
+                background-color: var(--text-input-field);
+                width: 7px;
+                height: 7px;
+                border-radius: 50%;
+                transition: 1s;
+            }
+
+            .manual-btn:hover {
+                background: var(--very-light-pink);
+            }
+
+            #radio1:checked ~ .first {
+                margin-left: 0;
+            }
+
+            #radio2:checked ~ .first {
+                margin-left: -20%;
+            }
+
+            #radio3:checked ~ .first {
+                margin-left: -40%;
+            }
+
+            /*css for automatic navigation*/
+
+            .navigation-auto {
+                position: absolute;
+                margin-top: 364px;
+                width: var(--item-size);
+                height: 10px;
+                display: flex;
+                gap: 8px;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .navigation-auto label {
+                cursor: pointer;
+                width: 7px;
+                height: 7px;
+                border-radius: 50%;
+                transition: 1s;
+            }
+
+            #radio1:checked ~ .navigation-auto .auto-btn1 {
+                background: var(--very-light-pink);
+            }
+
+            #radio2:checked ~ .navigation-auto .auto-btn2 {
+                background: var(--very-light-pink);
+            }
+
+            #radio3:checked ~ .navigation-auto .auto-btn3 {
+                background: var(--very-light-pink);
+            }
+
             @media (max-width: 640px) {
-                .product-detail {
-                    width: 100%;
+                :root {
+                    --item-size: 100vw;
                 }
             }
         </style>
@@ -109,11 +215,55 @@
             <div class="product-detail-close">
                 <img src="./assets/icons/icon_close.png" alt="close" />
             </div>
-            <img
-                src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                alt="bike"
-                class="product-image"
-            />
+
+            <!--image slider start-->
+            <div class="slider">
+                <div class="slides">
+                    <!--radio buttons start-->
+                    <input type="radio" name="radio-btn" id="radio1" checked />
+                    <input type="radio" name="radio-btn" id="radio2" />
+                    <input type="radio" name="radio-btn" id="radio3" />
+                    <!--radio buttons end-->
+
+                    <!--slide images start-->
+                    <div class="slide first">
+                        <img
+                            src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                            alt="bike"
+                        />
+                    </div>
+                    <div class="slide">
+                        <img
+                            src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                            alt="bike"
+                        />
+                    </div>
+                    <div class="slide">
+                        <img
+                            src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                            alt="bike"
+                        />
+                    </div>
+                    <!--slide images end-->
+
+                    <!--automatic navigation start-->
+                    <div class="navigation-auto">
+                        <label for="radio1" class="auto-btn1"></label>
+                        <label for="radio2" class="auto-btn2"></label>
+                        <label for="radio3" class="auto-btn3"></label>
+                    </div>
+                    <!--automatic navigation end-->
+                </div>
+
+                <!--manual navigation start-->
+                <div class="navigation-manual">
+                    <label for="radio1" class="manual-btn"></label>
+                    <label for="radio2" class="manual-btn"></label>
+                    <label for="radio3" class="manual-btn"></label>
+                </div>
+                <!--manual navigation end-->
+            </div>
+
             <div class="product-info">
                 <p>$ 35,00</p>
                 <p>Bike</p>
@@ -131,5 +281,16 @@
                 </button>
             </div>
         </aside>
+
+        <script type="text/javascript">
+            var counter = 1;
+            setInterval(function () {
+                document.getElementById('radio' + counter).checked = true;
+                counter++;
+                if (counter > 3) {
+                    counter = 1;
+                }
+            }, 4000);
+        </script>
     </body>
 </html>
