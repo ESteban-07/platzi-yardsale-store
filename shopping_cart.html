@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&family=Roboto:wght@700&display=swap"
+            rel="stylesheet"
+        />
+        <title>Document</title>
+        <style>
+            :root {
+                --white: #ffffff;
+                --black: #000000;
+                --very-light-pink: #c7c7c7;
+                --text-input-field: #f7f7f7;
+                --hospital-green: #acd9b2;
+                --sm: 14px;
+                --md: 16px;
+                --lg: 18px;
+                --card-size: 240px;
+                --item-size: 360px;
+            }
+            body {
+                margin: 0;
+                font-family: 'Quicksand', sans-serif;
+            }
+            .shopping-cart {
+                width: var(--item-size);
+                position: absolute;
+                top: 0;
+                right: 0;
+                display: grid;
+                justify-content: center;
+            }
+            .shopping-cart-container {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                width: var(--item-size);
+                height: auto;
+                box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.119789);
+                border-radius: 5px;
+                box-sizing: border-box;
+            }
+            .title {
+                font-size: var(--lg);
+                font-weight: bold;
+            }
+            .title .back-arrow {
+                rotate: 180deg;
+                margin-left: 16px;
+                margin-right: 24px;
+                cursor: pointer;
+            }
+            .cart-items {
+                width: var(--item-size);
+                height: auto;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+            .cart-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: var(--item-size);
+                padding: 16px;
+                box-sizing: border-box;
+            }
+            .cart-item figure,
+            .cart-item div {
+                margin: 0;
+                display: flex;
+                align-items: center;
+                gap: 16px;
+            }
+            .cart-item figure img {
+                width: 80px;
+                height: 80px;
+                border-radius: 10px;
+                object-fit: cover;
+            }
+            .cart-item figure figcaption {
+                font-size: var(--sm);
+                color: var(--very-light-pink);
+            }
+            .cart-item div .item-price {
+                font-size: var(--md);
+                font-weight: bold;
+            }
+            .cart-item div .delete-item {
+                cursor: pointer;
+            }
+            .total-payment {
+                padding: 16px;
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+            }
+            .total {
+                background-color: var(--very-light-pink);
+                padding: 16px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-radius: 10px;
+            }
+            .total p:nth-child(1) {
+                font-size: var(--sm);
+                font-weight: bold;
+            }
+            .total p:nth-child(2) {
+                font-size: var(--md);
+                font-weight: bold;
+            }
+            .primary-button {
+                background-color: var(--hospital-green);
+                text-align: center;
+                color: var(--white);
+                border: none;
+                border-radius: 10px;
+                height: 70px;
+                font-size: var(--lg);
+                font-weight: bold;
+                cursor: pointer;
+            }
+            @media (max-width: 640px) {
+                .shopping-cart {
+                    width: 100vw;
+                }
+                .shopping-cart-container {
+                    box-shadow: none;
+                    border-radius: 0;
+                }
+                .title {
+                    text-align: center;
+                }
+                .title .back-arrow {
+                    display: none;
+                }
+            }
+            @media (max-width: 335px) {
+                :root {
+                    --item-size: 100vw;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="shopping-cart">
+            <div class="shopping-cart-container">
+                <h1 class="title">
+                    <span>
+                        <img
+                            src="./assets/icons/flechita.svg"
+                            alt="exit shopping cart"
+                            class="back-arrow"
+                        />
+                    </span>
+                    Shopping cart
+                </h1>
+
+                <div class="cart-items">
+                    <div class="cart-item">
+                        <figure>
+                            <img
+                                src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                                alt="bike"
+                            />
+                            <figcaption>Bike</figcaption>
+                        </figure>
+
+                        <div>
+                            <p class="item-price">$ 35,00</p>
+                            <img
+                                src="./assets/icons/icon_close.png"
+                                alt="delete item from cart"
+                                class="delete-item"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="cart-item">
+                        <figure>
+                            <img
+                                src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                                alt="bike"
+                            />
+                            <figcaption>Bike</figcaption>
+                        </figure>
+
+                        <div>
+                            <p class="item-price">$ 35,00</p>
+                            <img
+                                src="./assets/icons/icon_close.png"
+                                alt="delete item from cart"
+                                class="delete-item"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="cart-item">
+                        <figure>
+                            <img
+                                src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                                alt="bike"
+                            />
+                            <figcaption>Bike</figcaption>
+                        </figure>
+
+                        <div>
+                            <p class="item-price">$ 35,00</p>
+                            <img
+                                src="./assets/icons/icon_close.png"
+                                alt="delete item from cart"
+                                class="delete-item"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="cart-item">
+                        <figure>
+                            <img
+                                src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                                alt="bike"
+                            />
+                            <figcaption>Bike</figcaption>
+                        </figure>
+
+                        <div>
+                            <p class="item-price">$ 35,00</p>
+                            <img
+                                src="./assets/icons/icon_close.png"
+                                alt="delete item from cart"
+                                class="delete-item"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="total-payment">
+                    <div class="total">
+                        <p>Total</p>
+                        <p>$ 560.00</p>
+                    </div>
+
+                    <button class="primary-button">Checkout</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
