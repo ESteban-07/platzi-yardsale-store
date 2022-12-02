@@ -255,6 +255,7 @@ function toggleProductDetailMobileView() {
     }
 
     if (!isProductDetailClosed && mobileMediaQuery.matches) {
+        smoothScrollToTop();
         mainContainer.classList.add('--product-detail-view');
     } else {
         mainContainer.classList.remove('--product-detail-view');
@@ -270,4 +271,8 @@ function automaticSlider() {
             counter = 1;
         }
     }, 4000);
+}
+
+function smoothScrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
