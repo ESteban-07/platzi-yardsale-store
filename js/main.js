@@ -24,6 +24,7 @@ const slider = document.querySelector('.slider');
 
 navbarEmail.addEventListener('click', toggleDesktopMenu);
 burguerMenu.addEventListener('click', showMobileMenu);
+yardSaleLogo.addEventListener('click', redirectToHomePage);
 closeButton.addEventListener('click', closeMobileMenu);
 openShoppingCartBtn.addEventListener('click', toggleShoppingCart);
 exitShoppingCartBtn.addEventListener('click', exitShoppingCart);
@@ -262,4 +263,8 @@ function toggleProductDetailMobileView() {
 
 function smoothScrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function redirectToHomePage() {
+    return (location.href = 'index.html');
 }
