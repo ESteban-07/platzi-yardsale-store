@@ -413,7 +413,7 @@ nav {
     border-bottom-right-radius: 20px;
 }
 .product-detail .item-details {
-    margin: 4px 24px 24px;
+    margin: 32px 24px 24px;
 }
 .item-details p:nth-child(1) {
     font-size: var(--lg);
@@ -455,118 +455,67 @@ nav {
     filter: invert(1);
 }
 
-/* slider */
+/* Slider */
 
 .slider {
     position: relative;
     width: var(--item-size);
-    height: auto;
-    overflow: hidden;
+    height: var(--item-size);
 }
 
-.slides {
-    position: relative;
+.slides-container {
     width: var(--item-size);
-    height: 100%;
-    display: flex;
-}
-
-.slides input {
-    display: none;
-}
-
-.slides .images-container {
-    width: 300%;
-    height: 100%;
-    display: flex;
-    overflow-x: scroll;
-    overscroll-behavior-x: contain;
-    scroll-snap-type: x mandatory;
-}
-
-.images-container .center {
-    scroll-snap-align: center;
+    height: var(--item-size);
 }
 
 .slide {
     width: 100%;
-    transition: 2s;
+    height: 100%;
+    display: none;
+    animation: fadeIn 0.3s;
+    -webkit-animation: fadeIn 0.3s;
+    -moz-animation: fadeIn 0.3s;
+    -o-animation: fadeIn 0.3s;
+    -ms-animation: fadeIn 0.3s;
 }
 
 .slide img {
-    width: var(--item-size);
-    height: 360px;
-    object-fit: cover;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
+    max-width: 100%;
+    max-height: 100%;
+    aspect-ratio: 1;
+    object-fit: contain;
 }
 
-/*css for manual slide navigation*/
-
-.navigation-manual {
-    width: var(--item-size);
-    height: 10px;
+.--slide-selected {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 10px;
 }
 
-.manual-btn {
-    background-color: var(--text-input-field);
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    transition: 1s;
-}
-
-.manual-btn:hover {
-    background: var(--very-light-pink);
-}
-
-#radio1:checked ~ .images-container .first {
-    margin-left: 0;
-}
-
-#radio2:checked ~ .images-container .first {
-    margin-left: -100%;
-}
-
-#radio3:checked ~ .images-container .first {
-    margin-left: -200%;
-}
-
-/*css for automatic navigation*/
-
-.navigation-auto {
+.slides-nav {
     position: absolute;
-    margin-top: 364px;
-    width: var(--item-size);
-    height: 10px;
+    bottom: 0;
+    padding: 0;
+    transform: translateY(200%);
+    width: 100%;
     display: flex;
-    gap: 8px;
     justify-content: center;
-    align-items: center;
+
+    gap: 8px;
 }
 
-.navigation-auto label {
-    cursor: pointer;
-    width: 7px;
-    height: 7px;
+.slide-btn {
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+
+    background-color: var(--text-input-field);
+    border: 1px solid var(--very-light-pink);
     border-radius: 50%;
-    transition: 1s;
+    cursor: pointer;
 }
 
-#radio1:checked ~ .navigation-auto .auto-btn1 {
-    background: var(--very-light-pink);
-}
-
-#radio2:checked ~ .navigation-auto .auto-btn2 {
-    background: var(--very-light-pink);
-}
-
-#radio3:checked ~ .navigation-auto .auto-btn3 {
+.--btn-selected {
     background: var(--very-light-pink);
 }
 
@@ -584,15 +533,57 @@ nav {
     overflow: hidden;
 }
 
-.no-transition {
-    margin-left: 0;
-    transition: none;
-}
-
 .--product-detail-view {
     position: absolute;
-    width: 100vw;
-    top: 680px;
+    width: 100%;
+    /* top: 680px; */
+}
+
+/* Slides animation */
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-ms-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 /* Media Queries */
@@ -628,10 +619,11 @@ nav {
         display: none;
     }
     .product-detail {
-        --item-size: 100vw;
+        --item-size: 100%;
         height: fit-content;
     }
 }
+
 @media (max-width: 350px) {
     :root {
         --item-size: 100vw;
