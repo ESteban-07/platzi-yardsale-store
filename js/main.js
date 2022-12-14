@@ -19,6 +19,28 @@ const cardsContainer = document.querySelector('.cards-container');
 
 const productDetail = document.querySelector('.product-detail');
 const productDetailCloseBtn = document.querySelector('.product-detail-close');
+const sliderBtns = [...document.querySelectorAll('input[name="radio-btn"]')];
+const slides = [...document.querySelectorAll('.slide')];
+const imagesContainer = document.querySelector('.images-container');
+let counter = 0;
+let scrollPosition = 0;
+let slideWith = 0;
+
+let automaticSliderInterval;
+
+function automaticSlider() {
+    // console.log('auto scroll on');
+    automaticSliderInterval = setInterval(() => {
+        // console.log(counter);
+        sliderBtns[counter].checked = true;
+
+        counter++;
+
+        if (counter > 2) {
+            counter = 0;
+        }
+    }, 3000);
+}
 
 const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -31,6 +53,58 @@ closeButton.addEventListener('click', closeMobileMenu);
 openShoppingCartBtn.addEventListener('click', toggleShoppingCart);
 exitShoppingCartBtn.addEventListener('click', exitShoppingCart);
 productDetailCloseBtn.addEventListener('click', exitProductDetail);
+sliderBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+        const firstSlide = imagesContainer.firstElementChild;
+
+        if (!firstSlide.classList.contains('first')) {
+            firstSlide.classList.add('first');
+        }
+
+        if (imagesContainer.classList.contains('auto-scroll-on')) {
+            imagesContainer.classList.remove('auto-scroll-on');
+        }
+
+        // console.log('auto scroll off');
+        clearInterval(automaticSliderInterval);
+    });
+});
+
+// FALTA ARREGLAR
+imagesContainer.addEventListener('scroll', (e) => {
+    const firstSlide = imagesContainer.firstElementChild;
+
+    scrollPosition = e.currentTarget.scrollLeft;
+
+    slideWith = e.currentTarget.offsetWidth;
+
+    validateScrollPosition(scrollPosition, slideWith);
+
+    if (imagesContainer.classList.contains('auto-scroll-on')) {
+        imagesContainer.classList.remove('auto-scroll-on');
+    }
+
+    firstSlide.classList.remove('first');
+    // console.log('auto scroll off');
+    clearInterval(automaticSliderInterval);
+});
+
+function validateScrollPosition(scrollPosition, slideWidth) {
+    // console.log(slideWidth);
+    if (scrollPosition >= 0 && scrollPosition < slideWidth) {
+        // primer slide
+        sliderBtns[0].checked = true;
+    } else if (
+        scrollPosition >= slideWidth &&
+        scrollPosition < slideWidth * 2
+    ) {
+        // segunda slide
+        sliderBtns[1].checked = true;
+    } else {
+        //tercera slide
+        sliderBtns[2].checked = true;
+    }
+}
 
 function toggleDesktopMenu() {
     const isShoppingCartClosed = shoppingCart.classList.contains('inactive');
@@ -215,6 +289,7 @@ function renderCurrentItemDetails(e) {
     productDetail.classList.remove('inactive');
 
     toggleProductDetailMobileView();
+
     mobileMediaQuery.addEventListener('change', toggleProductDetailMobileView);
 
     const currentCardIndex = productCards.indexOf(e.currentTarget);
@@ -240,6 +315,10 @@ function renderCurrentItemDetails(e) {
     const itemDescription = document.querySelector('#item-description');
     itemDescription.innerText = currentItem.description;
 
+    displayFirstSlide();
+    noTransition();
+
+    imagesContainer.classList.add('auto-scroll-on');
     automaticSlider();
 }
 
@@ -262,15 +341,19 @@ function toggleProductDetailMobileView() {
     }
 }
 
-function automaticSlider() {
-    let counter = 1;
-    setInterval(function () {
-        document.getElementById('radio' + counter).checked = true;
-        counter++;
-        if (counter > 3) {
-            counter = 1;
-        }
-    }, 4000);
+function displayFirstSlide() {
+    slides.forEach((slide) => slide.classList.add('no-transition'));
+
+    counter = 0;
+
+    // first radio button checked
+    sliderBtns[0].checked = true;
+}
+
+function noTransition() {
+    setTimeout(() => {
+        slides.forEach((slide) => slide.classList.remove('no-transition'));
+    }, 1000);
 }
 
 function smoothScrollToTop() {
