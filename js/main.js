@@ -166,7 +166,7 @@ function renderProducts(arr) {
         productCard.classList.add('product-card');
 
         const productImg = document.createElement('img');
-        productImg.setAttribute('src', product.image);
+        productImg.setAttribute('src', product.images[0]);
         productImg.setAttribute('alt', product.name);
 
         const productInfo = document.createElement('div');
