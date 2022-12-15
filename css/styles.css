@@ -105,6 +105,7 @@ nav {
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.119789);
     border-radius: 6px;
     padding: 20px 20px 0 20px;
+    z-index: 7;
 }
 .desktop-menu ul {
     list-style: none;
@@ -333,6 +334,8 @@ nav {
 /* Product List */
 
 .main-container {
+    position: absolute;
+    width: 100%;
     background: #fff;
 }
 
@@ -388,6 +391,7 @@ nav {
     background-color: var(--white);
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.119789);
     border-bottom-left-radius: 5px;
+    z-index: 8;
 }
 .product-detail-close {
     position: absolute;
@@ -526,18 +530,12 @@ nav {
     display: none;
 }
 
-.menu-active {
+.mobile-menu:not(.inactive) {
     transform: translateX(0);
 }
 
 .no-scroll {
     overflow: hidden;
-}
-
-.--product-detail-view {
-    position: absolute;
-    width: 100%;
-    /* top: 680px; */
 }
 
 /* Slides animation */
