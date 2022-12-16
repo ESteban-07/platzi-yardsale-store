@@ -114,9 +114,9 @@ productList.push({
     price: formatter.format(1200),
     category: 'furniture',
     images: [
+        `https://m.media-amazon.com/images/W/WEBP_402378-T1/images/I/617XYQb8lRS._AC_SL1500_.jpg`,
         `https://m.media-amazon.com/images/W/WEBP_402378-T1/images/I/715xXtjpE8L._AC_SL1313_.jpg`,
         `https://m.media-amazon.com/images/W/WEBP_402378-T1/images/I/71JPwXEYqsL._AC_SL1313_.jpg`,
-        `https://m.media-amazon.com/images/W/WEBP_402378-T1/images/I/617XYQb8lRS._AC_SL1500_.jpg`,
     ],
     description:
         'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Earum accusamus eius reprehenderit quos, perferendis vel!',
@@ -205,9 +205,9 @@ productList.push({
     price: formatter.format(1200),
     category: 'others',
     images: [
+        `https://m.media-amazon.com/images/I/81ntWm93bSL._SL1500_.jpg`,
         `https://m.media-amazon.com/images/I/91DF+TfnkRL._SL1500_.jpg`,
         `https://m.media-amazon.com/images/I/91VAholgrHL._SL1500_.jpg`,
-        `https://m.media-amazon.com/images/I/81ntWm93bSL._SL1500_.jpg`,
     ],
     description:
         'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Earum accusamus eius reprehenderit quos, perferendis vel!',
