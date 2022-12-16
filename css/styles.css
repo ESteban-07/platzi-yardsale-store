@@ -52,15 +52,17 @@ nav {
 }
 .navbar-left ul {
     margin-left: 12px;
+    gap: 4px;
 }
-.navbar-left ul li a {
+.navbar-link {
     text-decoration: none;
     color: var(--very-light-pink);
     border: 1px solid var(--white);
     padding: 8px;
     border-radius: 8px;
 }
-.navbar-left ul li a:hover {
+
+.navbar-link:hover {
     color: var(--hospital-green);
     border: 1px solid var(--hospital-green);
 }
@@ -528,6 +530,11 @@ nav {
 
 .inactive {
     display: none;
+}
+
+.--active-link {
+    color: var(--hospital-green);
+    border: 1px solid var(--hospital-green);
 }
 
 .mobile-menu:not(.inactive) {

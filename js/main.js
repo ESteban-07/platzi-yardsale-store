@@ -270,3 +270,21 @@ function verticallyResizeMainContainer() {
 function redirectToHomePage() {
     return (location.href = 'index.html');
 }
+
+function dynamicActiveNavLink() {
+    const navLinks = document.querySelectorAll('.navbar-link');
+
+    navLinks.forEach((link) => {
+        link.addEventListener('click', (e) => {
+            navLinks.forEach((link) => {
+                link.classList.remove('--active-link');
+            });
+
+            e.currentTarget.classList.add('--active-link');
+        });
+    });
+
+    navLinks[0].classList.add('--active-link');
+}
+
+dynamicActiveNavLink();
