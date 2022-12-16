@@ -112,9 +112,11 @@ function renderProducts(arr) {
         const productCard = document.createElement('div');
         productCard.classList.add('product-card');
 
-        const productImg = document.createElement('img');
-        productImg.setAttribute('src', product.images[0]);
-        productImg.setAttribute('alt', product.name);
+        const productImage = document.createElement('div');
+        productImage.classList.add('product-image');
+        productImage.style.backgroundImage = `url(${product.images[0]})`;
+        // productImage.setAttribute('src', product.images[0]);
+        // productImage.setAttribute('alt', product.name);
 
         const productInfo = document.createElement('div');
         productInfo.classList.add('product-info');
@@ -139,7 +141,7 @@ function renderProducts(arr) {
 
         productInfo.append(productInfoDiv, productInfoFigure);
 
-        productCard.append(productImg, productInfo);
+        productCard.append(productImage, productInfo);
 
         cardsContainer.appendChild(productCard);
     }

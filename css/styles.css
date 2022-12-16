@@ -352,11 +352,19 @@ nav {
     cursor: pointer;
     width: var(--card-size);
 }
-.product-card img {
+/* .product-card img {
     width: var(--card-size);
     height: var(--card-size);
     border-radius: 20px;
     object-fit: cover;
+} */
+.product-image {
+    width: var(--card-size);
+    height: var(--card-size);
+    border-radius: 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
 }
 .product-info {
     display: flex;
