@@ -115,6 +115,8 @@ function renderProducts(arr) {
         const productImage = document.createElement('div');
         productImage.classList.add('product-image');
         productImage.style.backgroundImage = `url(${product.images[0]})`;
+        // productImage.style.aspectRatio = 1;
+        // productImage.style.objectFit = cover;
         // productImage.setAttribute('src', product.images[0]);
         // productImage.setAttribute('alt', product.name);
 
@@ -197,6 +199,7 @@ function renderSlider(currentItem) {
             <img
                 src="${image}"
                 alt="${currentItem.name}"
+                class="slide-img"
             />
         </div>
         `;
@@ -234,12 +237,16 @@ function renderSlider(currentItem) {
             // select item cliked
             slidesArray[i].classList.add('--slide-selected');
             button.classList.add('--btn-selected');
+
+            resizeSlideImageX();
         });
     });
 
     // Select the first item on page load
     slidesArray[0].classList.add('--slide-selected');
     buttonsArray[0].classList.add('--btn-selected');
+
+    resizeSlideImageX();
 }
 
 function clearSlider() {
@@ -290,3 +297,19 @@ function dynamicActiveNavLink() {
 }
 
 dynamicActiveNavLink();
+
+function resizeSlideImageX() {
+    const currentSlide = document.querySelector('.--slide-selected');
+    const currentSlideImage = currentSlide.firstElementChild;
+    const naturalImageWidth = currentSlideImage.naturalWidth;
+    const naturalImageHeight = currentSlideImage.naturalHeight;
+
+    if (
+        naturalImageWidth < naturalImageHeight &&
+        naturalImageWidth > 900 &&
+        naturalImageHeight > 1100
+    ) {
+        currentSlideImage.style.aspectRatio = 1;
+        currentSlideImage.style.objectFit = 'cover';
+    }
+}
