@@ -6,6 +6,7 @@ const formatter = new Intl.NumberFormat('en-US', {
 const productList = [];
 
 productList.push({
+    id: 1,
     name: 'Boys Jacket',
     price: formatter.format(400),
     category: 'clothes',
@@ -19,6 +20,7 @@ productList.push({
 });
 
 productList.push({
+    id: 2,
     name: 'Boys Black Jacket',
     price: formatter.format(450),
     category: 'clothes',
@@ -32,6 +34,7 @@ productList.push({
 });
 
 productList.push({
+    id: 3,
     name: `Red Cap`,
     price: formatter.format(300),
     category: 'clothes',
@@ -45,6 +48,7 @@ productList.push({
 });
 
 productList.push({
+    id: 4,
     name: `Micro SD`,
     price: formatter.format(300),
     category: 'electronics',
@@ -58,6 +62,7 @@ productList.push({
 });
 
 productList.push({
+    id: 5,
     name: `Nintendo Switch`,
     price: formatter.format(500),
     category: 'electronics',
@@ -71,6 +76,7 @@ productList.push({
 });
 
 productList.push({
+    id: 6,
     name: `Nintendo Switch Case`,
     price: formatter.format(300),
     category: 'electronics',
@@ -84,6 +90,7 @@ productList.push({
 });
 
 productList.push({
+    id: 7,
     name: `Dresser Furniture`,
     price: formatter.format(700),
     category: 'furniture',
@@ -97,6 +104,7 @@ productList.push({
 });
 
 productList.push({
+    id: 8,
     name: `Night Stand`,
     price: formatter.format(900),
     category: 'furniture',
@@ -110,6 +118,7 @@ productList.push({
 });
 
 productList.push({
+    id: 9,
     name: `Desktop Furniture`,
     price: formatter.format(1200),
     category: 'furniture',
@@ -123,6 +132,7 @@ productList.push({
 });
 
 productList.push({
+    id: 10,
     name: `Buzz Lightyear Toy`,
     price: formatter.format(200),
     category: 'toys',
@@ -136,6 +146,7 @@ productList.push({
 });
 
 productList.push({
+    id: 11,
     name: `McQueen Car`,
     price: formatter.format(1200),
     category: 'toys',
@@ -149,6 +160,7 @@ productList.push({
 });
 
 productList.push({
+    id: 12,
     name: `Nerf Fornite Gun`,
     price: formatter.format(1200),
     category: 'toys',
@@ -162,6 +174,7 @@ productList.push({
 });
 
 productList.push({
+    id: 13,
     name: 'Toddler Motocross',
     price: formatter.format(1600),
     category: 'others',
@@ -175,6 +188,7 @@ productList.push({
 });
 
 productList.push({
+    id: 14,
     name: 'Kids Helmet',
     price: formatter.format(1500),
     category: 'others',
@@ -188,6 +202,7 @@ productList.push({
 });
 
 productList.push({
+    id: 15,
     name: 'Motocross Boots',
     price: formatter.format(300),
     category: 'others',
@@ -201,6 +216,7 @@ productList.push({
 });
 
 productList.push({
+    id: 16,
     name: 'Mountain Bike',
     price: formatter.format(1200),
     category: 'others',
@@ -214,6 +230,7 @@ productList.push({
 });
 
 productList.push({
+    id: 17,
     name: 'Racing Glasses',
     price: formatter.format(2200),
     category: 'others',
@@ -227,6 +244,7 @@ productList.push({
 });
 
 productList.push({
+    id: 18,
     name: 'Toddler Bike',
     price: formatter.format(1270),
     category: 'others',
@@ -240,6 +258,7 @@ productList.push({
 });
 
 productList.push({
+    id: 19,
     name: 'Motocross Jersey ',
     price: formatter.format(800),
     category: 'others',
@@ -253,6 +272,7 @@ productList.push({
 });
 
 productList.push({
+    id: 20,
     name: 'Racing Gloves',
     price: formatter.format(600),
     category: 'others',
@@ -266,6 +286,7 @@ productList.push({
 });
 
 productList.push({
+    id: 21,
     name: 'Bike Seat',
     price: formatter.format(876),
     category: 'others',
@@ -279,6 +300,7 @@ productList.push({
 });
 
 productList.push({
+    id: 22,
     name: 'Waterproof Phone Bag',
     price: formatter.format(876),
     category: 'others',

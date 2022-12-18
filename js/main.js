@@ -16,11 +16,17 @@ const mobileMediaQuery = window.matchMedia('(max-width: 640px)');
 
 const mainContainer = document.querySelector('.main-container');
 const cardsContainer = document.querySelector('.cards-container');
+let productCardsHTML;
 
 const productDetail = document.querySelector('.product-detail');
 
 const productDetailCloseBtn = document.querySelector('.product-detail-close');
 const slider = document.querySelector('.slider');
+
+window.addEventListener('DOMContentLoaded', function () {
+    renderCategoryButtons();
+    renderProducts(productList);
+});
 
 navbarEmail.addEventListener('click', toggleDesktopMenu);
 
@@ -107,67 +113,48 @@ function exitProductDetail() {
     clearSlider();
 }
 
-function renderProducts(arr) {
-    for (let product of arr) {
-        const productCard = document.createElement('div');
-        productCard.classList.add('product-card');
+function renderProducts(products) {
+    const productCards = products
+        .map((product) => {
+            return `
+            <div class="product-card" data-id=${product.id}>
+                <div
+                    class="product-image"
+                    style="background-image: url(${product.images[0]})">
+                </div>
+                <div class="product-info">
+                    <div>
+                        <p>${product.price}</p>
+                        <p>${product.name}</p>
+                    </div>
+                    <figure>
+                        <img
+                            src="./assets/icons/bt_add_to_cart.svg"
+                            alt="Add ${product.name} to cart"
+                        />
+                    </figure>
+                </div>
+            </div>
+            `;
+        })
+        .join('');
 
-        const productImage = document.createElement('div');
-        productImage.classList.add('product-image');
-        productImage.style.backgroundImage = `url(${product.images[0]})`;
-        // productImage.style.aspectRatio = 1;
-        // productImage.style.objectFit = cover;
-        // productImage.setAttribute('src', product.images[0]);
-        // productImage.setAttribute('alt', product.name);
+    cardsContainer.innerHTML = productCards;
 
-        const productInfo = document.createElement('div');
-        productInfo.classList.add('product-info');
+    productCardsHTML = [...document.querySelectorAll('.product-card')];
 
-        const productInfoDiv = document.createElement('div');
-
-        const productPrice = document.createElement('p');
-        productPrice.innerText = product.price;
-
-        const productName = document.createElement('p');
-        productName.innerText = product.name;
-
-        productInfoDiv.append(productPrice, productName);
-
-        const productInfoFigure = document.createElement('figure');
-
-        const addToCartIcon = document.createElement('img');
-        addToCartIcon.setAttribute('src', './assets/icons/bt_add_to_cart.svg');
-        addToCartIcon.setAttribute('alt', `add ${product.name} to cart`);
-
-        productInfoFigure.appendChild(addToCartIcon);
-
-        productInfo.append(productInfoDiv, productInfoFigure);
-
-        productCard.append(productImage, productInfo);
-
-        cardsContainer.appendChild(productCard);
-    }
+    productCardsHTML.forEach((card) => {
+        card.addEventListener('click', renderCurrentItemDetails);
+    });
 }
-
-renderProducts(productList);
-
-// Renderizando los detalles del producto seleccionado
-
-const productCards = [...document.querySelectorAll('.product-card')];
-
-productCards.forEach((productCard) => {
-    productCard.addEventListener('click', renderCurrentItemDetails);
-});
 
 function renderCurrentItemDetails(e) {
     toggleProductDetail(e);
 
-    const currentCardIndex = productCards.indexOf(e.currentTarget);
+    const itemId = e.currentTarget.dataset.id;
 
-    const currentItem = productList.find((product, productIndex) => {
-        if (productIndex == currentCardIndex) {
-            return product;
-        }
+    const currentItem = productList.find((product) => {
+        return product.id == itemId;
     });
 
     const itemPrice = document.querySelector('#item-price');
@@ -280,24 +267,6 @@ function redirectToHomePage() {
     return (location.href = 'index.html');
 }
 
-function dynamicActiveNavLink() {
-    const navLinks = document.querySelectorAll('.navbar-link');
-
-    navLinks.forEach((link) => {
-        link.addEventListener('click', (e) => {
-            navLinks.forEach((link) => {
-                link.classList.remove('--active-link');
-            });
-
-            e.currentTarget.classList.add('--active-link');
-        });
-    });
-
-    navLinks[0].classList.add('--active-link');
-}
-
-dynamicActiveNavLink();
-
 function resizeSlideImageX() {
     const currentSlide = document.querySelector('.--slide-selected');
     const currentSlideImage = currentSlide.firstElementChild;
@@ -312,4 +281,59 @@ function resizeSlideImageX() {
         currentSlideImage.style.aspectRatio = 1;
         currentSlideImage.style.objectFit = 'cover';
     }
+}
+
+function renderCategoryButtons() {
+    const btnContainer = document.querySelector('.btn-container');
+
+    const categories = productList.reduce(
+        function (values, item) {
+            if (!values.includes(item.category)) {
+                values.push(item.category);
+            }
+            return values;
+        },
+        ['all']
+    );
+
+    let categoryBtns = categories
+        .map((category) => {
+            return `<button class="filter-btn" type="button" data-id="${category}">${category}</button>`;
+        })
+        .join('');
+
+    btnContainer.innerHTML = categoryBtns;
+
+    const filterBtns = btnContainer.querySelectorAll('.filter-btn');
+
+    filterBtns.forEach((btn, i, arr) => {
+        btn.addEventListener('click', function (e) {
+            const currentBtn = arr[i];
+
+            const category = currentBtn.dataset.id;
+
+            const productsByCategory = productList.filter(
+                (item) => item.category == category
+            );
+
+            if (category === 'all') {
+                renderProducts(productList);
+            } else {
+                renderProducts(productsByCategory);
+            }
+
+            toggleActiveBtn(currentBtn, arr);
+        });
+    });
+
+    // First button active by default
+    filterBtns[0].classList.add('--active-btn');
+}
+
+function toggleActiveBtn(currentBtn, arrayBtns) {
+    arrayBtns.forEach((btn) => {
+        btn.classList.remove('--active-btn');
+    });
+
+    currentBtn.classList.add('--active-btn');
 }

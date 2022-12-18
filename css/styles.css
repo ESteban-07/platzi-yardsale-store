@@ -54,15 +54,20 @@ nav {
     margin-left: 12px;
     gap: 4px;
 }
-.navbar-link {
+.filter-btn {
     text-decoration: none;
     color: var(--very-light-pink);
     border: 1px solid var(--white);
     padding: 8px;
     border-radius: 8px;
+    background-color: var(--white);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    text-transform: capitalize;
 }
 
-.navbar-link:hover {
+.filter-btn:hover {
     color: var(--hospital-green);
     border: 1px solid var(--hospital-green);
 }
@@ -539,7 +544,7 @@ nav {
     display: none;
 }
 
-.--active-link {
+.--active-btn {
     color: var(--hospital-green);
     border: 1px solid var(--hospital-green);
 }
