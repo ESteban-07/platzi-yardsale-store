@@ -1,4 +1,5 @@
 const openMobileMenuBtn = document.querySelector('.burguer-menu');
+
 const navbarEmail = document.querySelector('.navbar-email');
 
 const desktopMenu = document.querySelector('.desktop-menu');
@@ -284,50 +285,65 @@ function resizeSlideImageX() {
 }
 
 function renderCategoryButtons() {
-    const btnContainer = document.querySelector('.btn-container');
+    const btnContainer = document.querySelectorAll('.btn-container');
 
-    const categories = productList.reduce(
-        function (values, item) {
-            if (!values.includes(item.category)) {
-                values.push(item.category);
-            }
-            return values;
-        },
-        ['all']
-    );
+    btnContainer.forEach((btnContainer) => {
+        const categories = productList.reduce(
+            function (values, item) {
+                if (!values.includes(item.category)) {
+                    values.push(item.category);
+                }
+                return values;
+            },
+            ['all']
+        );
 
-    let categoryBtns = categories
-        .map((category) => {
-            return `<button class="filter-btn" type="button" data-id="${category}">${category}</button>`;
-        })
-        .join('');
+        let categoryBtns = categories
+            .map((category) => {
+                return `<button class="filter-btn" type="button" data-id="${category}">${category}</button>`;
+            })
+            .join('');
 
-    btnContainer.innerHTML = categoryBtns;
+        btnContainer.innerHTML = categoryBtns;
 
-    const filterBtns = btnContainer.querySelectorAll('.filter-btn');
+        const filterBtns = btnContainer.querySelectorAll('.filter-btn');
 
-    filterBtns.forEach((btn, i, arr) => {
-        btn.addEventListener('click', function (e) {
-            const currentBtn = arr[i];
+        filterBtns.forEach((btn, i, arr) => {
+            btn.addEventListener('click', function (e) {
+                const currentBtn = arr[i];
 
-            const category = currentBtn.dataset.id;
+                const category = currentBtn.dataset.id;
 
-            const productsByCategory = productList.filter(
-                (item) => item.category == category
-            );
+                const productsByCategory = productList.filter(
+                    (item) => item.category == category
+                );
 
-            if (category === 'all') {
-                renderProducts(productList);
-            } else {
-                renderProducts(productsByCategory);
-            }
+                if (category === 'all') {
+                    renderProducts(productList);
+                } else {
+                    renderProducts(productsByCategory);
+                }
 
-            toggleActiveBtn(currentBtn, arr);
+                toggleActiveBtn(currentBtn, arr);
+
+                // Checking if mobile menu is opened to close components when clicking a filter button
+                const isMobileMenuOpened =
+                    !mobileMenu.classList.contains('inactive');
+
+                if (isMobileMenuOpened) {
+                    toggleDisplayedViews(mobileMenu, [
+                        productDetail,
+                        shoppingCart,
+                    ]);
+                    mainContainer.style.top = 'auto';
+                    document.body.classList.remove('no-scroll');
+                }
+            });
         });
-    });
 
-    // First button active by default
-    filterBtns[0].classList.add('--active-btn');
+        // First button active by default
+        filterBtns[0].classList.add('--active-btn');
+    });
 }
 
 function toggleActiveBtn(currentBtn, arrayBtns) {

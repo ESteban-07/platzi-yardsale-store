@@ -166,6 +166,40 @@ nav {
     width: 100%;
     height: 100%;
 }
+.mobile-menu .title-categories {
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--black);
+    font-weight: bold;
+    font-size: var(--md);
+    margin: 0;
+}
+
+.mobile-menu ul > .line-division {
+    padding: 0;
+}
+
+.mobile-menu .line-division {
+    height: 1px;
+    opacity: 0.5;
+    background-color: var(--very-light-pink);
+    border: none;
+}
+
+.mobile-menu .btn-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.mobile-menu .btn-container button {
+    text-decoration: none;
+    color: var(--black);
+    font-weight: bold;
+    padding: 12px 0;
+    border: none;
+}
+
 .mobile-menu div {
     width: 100%;
     height: 100vh;
@@ -182,18 +216,23 @@ nav {
 }
 .mobile-menu div ul {
     padding: 0;
-    margin: 24px 0 0;
+    margin: 0;
     list-style-type: none;
 }
-.mobile-menu div ul:nth-child(1) {
-    border-bottom: 1px solid var(--very-light-pink);
-}
+
 .mobile-menu div ul li {
-    margin-bottom: 24px;
+    padding: 8px 0;
 }
+
+.mobile-menu div ul:last-child li {
+    padding: 0px;
+}
+
 .mobile-menu div .email {
+    display: inline-block;
     font-size: var(--sm);
     font-weight: 300;
+    margin-bottom: 4px;
 }
 .mobile-menu div .sign-out {
     color: var(--hospital-green);
