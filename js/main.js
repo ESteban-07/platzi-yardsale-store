@@ -1,6 +1,7 @@
 const openMobileMenuBtn = document.querySelector('.burguer-menu');
 
 const navbarEmail = document.querySelector('.navbar-email');
+const navbarCart = document.querySelector('.navbar-shopping-cart');
 
 const desktopMenu = document.querySelector('.desktop-menu');
 
@@ -17,7 +18,6 @@ const mobileMediaQuery = window.matchMedia('(max-width: 640px)');
 
 const mainContainer = document.querySelector('.main-container');
 const cardsContainer = document.querySelector('.cards-container');
-let productCardsHTML;
 
 const productDetail = document.querySelector('.product-detail');
 
@@ -128,12 +128,12 @@ function renderProducts(products) {
                         <p>${product.price}</p>
                         <p>${product.name}</p>
                     </div>
-                    <figure>
-                        <img
-                            src="./assets/icons/bt_add_to_cart.svg"
-                            alt="Add ${product.name} to cart"
+                    <button class="add-to-cart-btn">
+                        <img 
+                        src="./assets/icons/bt_add_to_cart.svg" 
+                        alt="Add ${product.name} to cart" 
                         />
-                    </figure>
+                    </button>
                 </div>
             </div>
             `;
@@ -142,17 +142,67 @@ function renderProducts(products) {
 
     cardsContainer.innerHTML = productCards;
 
-    productCardsHTML = [...document.querySelectorAll('.product-card')];
+    const productCardsHTML = [...document.querySelectorAll('.product-card')];
 
     productCardsHTML.forEach((card) => {
-        card.addEventListener('click', renderCurrentItemDetails);
+        card.addEventListener('click', function (event) {
+            renderCurrentItemDetails(event);
+        });
+    });
+
+    const addToCartBtns = document.querySelectorAll('.add-to-cart-btn');
+
+    addToCartBtns.forEach((btn) => {
+        btn.addEventListener('click', toggleAddToCartBtn);
     });
 }
 
-function renderCurrentItemDetails(e) {
-    toggleProductDetail(e);
+function toggleAddToCartBtn(e) {
+    const itemId = e.composedPath()[3].dataset.id;
 
-    const itemId = e.currentTarget.dataset.id;
+    const currentItem = productList.find((product) => {
+        return product.id == itemId;
+    });
+
+    const btn = e.currentTarget;
+    const btnIcon = btn.querySelector('img');
+    const cart = document.querySelector('.cart');
+    let cartValue = parseInt(cart.innerText);
+    let counter = cartValue;
+    let isAddedToCart = false;
+
+    btn.classList.toggle('--added-to-cart');
+
+    if (btn.classList.contains('--added-to-cart')) {
+        btnIcon.src = 'assets/icons/bt_added_to_cart.svg';
+        cart.innerText = ++counter;
+        isAddedToCart = true;
+        currentItem.state = true;
+    } else {
+        btnIcon.src = 'assets/icons/bt_add_to_cart.svg';
+        cart.innerText = --counter;
+        isAddedToCart = false;
+        currentItem.state = false;
+    }
+
+    alertNotification(isAddedToCart);
+}
+
+function alertNotification(isAddedToCart) {
+    if (isAddedToCart) {
+        navbarCart.classList.add('--alert-notification');
+        setTimeout(() => {
+            navbarCart.classList.remove('--alert-notification');
+        }, 500);
+    } else {
+        navbarCart.classList.remove('--alert-notification');
+    }
+}
+
+function renderCurrentItemDetails(event) {
+    toggleProductDetail(event);
+
+    const itemId = event.currentTarget.dataset.id;
 
     const currentItem = productList.find((product) => {
         return product.id == itemId;
@@ -166,6 +216,29 @@ function renderCurrentItemDetails(e) {
 
     const itemDescription = document.querySelector('#item-description');
     itemDescription.innerText = currentItem.description;
+
+    const isCurrentItemAddedToCart = currentItem.state;
+
+    const currentBtn = productDetail.querySelector('button');
+
+    // FALTA ARREGLAR (actualizar contador y carrito de productos)
+
+    currentBtn.addEventListener('click', function () {
+        currentBtn.classList.toggle('--product-added');
+    });
+
+    const btnIcon = currentBtn.querySelector('img');
+    const btnText = currentBtn.querySelector('span');
+
+    if (isCurrentItemAddedToCart) {
+        currentBtn.classList.add('--product-added');
+        btnText.innerText = 'Added to cart';
+        btnIcon.src = 'assets/icons/bt_added_to_cart.svg';
+    } else {
+        currentBtn.classList.remove('--product-added');
+        btnText.innerText = 'Add to cart';
+        btnIcon.src = 'assets/icons/bt_add_to_cart.svg';
+    }
 
     clearSlider();
     renderSlider(currentItem);
