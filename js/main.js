@@ -263,6 +263,7 @@ function updateState(item) {
 
 function addItemToCart(item, array) {
     updateCartItemsCounter('increase');
+    updateTotalPayment(item, 'sum');
 
     const itemAdded = array.push(item);
 
@@ -271,12 +272,32 @@ function addItemToCart(item, array) {
 
 function removeItemFromCart(item, array) {
     updateCartItemsCounter('decrease');
+    updateTotalPayment(item, 'rest');
 
     const index = array.indexOf(item);
 
     const itemRemoved = array.splice(index, 1);
 
     return itemRemoved;
+}
+
+function updateTotalPayment(item, operation) {
+    const total = document.querySelector('#payment');
+    let totalPayment = undoFormmattedPrice(total.innerText);
+    let price = undoFormmattedPrice(item.price);
+
+    if (operation == 'sum') {
+        totalPayment += price;
+    } else if (operation == 'rest') {
+        totalPayment -= price;
+    }
+
+    total.innerText = formatter.format(totalPayment);
+}
+
+function undoFormmattedPrice(price) {
+    const regex = /[$,]/g;
+    return parseFloat(price.replace(regex, ''));
 }
 
 function updateCartItemsCounter(expression) {
