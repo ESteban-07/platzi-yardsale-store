@@ -282,7 +282,7 @@ nav {
 }
 .cart-items {
     width: var(--item-size);
-    min-height: 200px;
+    min-height: 335px;
     max-height: 500px;
     overflow-y: scroll;
     display: flex;

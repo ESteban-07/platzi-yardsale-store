@@ -151,11 +151,10 @@ function renderProducts(products) {
 
     productCardsHTML.forEach((card) => {
         card.addEventListener('click', function (e) {
-            // const producImage = card.querySelector('.product-image');
-            // if (e.target == producImage) {
-            //     renderCurrentItemDetails(e);
-            // }
-            renderCurrentItemDetails(e);
+            const producImage = card.querySelector('.product-image');
+            if (e.target == producImage) {
+                renderCurrentItemDetails(e);
+            }
         });
     });
 
@@ -167,6 +166,8 @@ function renderProducts(products) {
 }
 
 function toggleAddToCartBtn(e) {
+    const productCardBtn = e.currentTarget;
+
     const itemId = e.currentTarget.dataset.id;
 
     const currentItem = productList.find((product) => {
@@ -183,44 +184,34 @@ function toggleAddToCartBtn(e) {
         removeItemFromCart(currentItem, cartItemsArray);
     }
 
-    updateStyles(currentItem);
+    updateAddToCartBtnStyles(currentItem, productCardBtn);
+
+    // Updating styles for product detail button when product detail is opened already
+    const isProductDetailOpened = !productDetail.classList.contains('inactive');
+
+    if (isProductDetailOpened) {
+        const productDetailBtn = productDetail.querySelector('button');
+
+        updateAddToCartBtnStyles(currentItem, productDetailBtn);
+    }
+
     alertNotification(isProductAddedToCart);
     renderCartItems(cartItemsArray);
 }
 
 // FALTA AGREGAR ESTILOS
 
-function updateStyles(item) {
-    const isProductDetailOpened = !productDetail.classList.contains('inactive');
-
+function updateAddToCartBtnStyles(item, btn) {
     const isProductAddedToCart = item.state;
 
-    if (isProductDetailOpened) {
-        // PRODUCT CARD BUTTON VARIABLES
-        const productCard = document.querySelector(
-            `div.product-card[data-id="${item.id}"]`
-        );
-
-        const productCardBtn = productCard.querySelector(
-            `button[data-id="${item.id}"]`
-        );
-
-        const productCardBtnIcon = productCardBtn.querySelector('img');
-
+    if (btn.classList.contains('primary-button')) {
         // PRODUCT DETAIL BUTTON VARIABLES
-        const productDetailBtn = productDetail.querySelector(
-            `button[data-id="${item.id}"]`
-        );
-
+        const productDetailBtn = btn;
         const productDetailBtnIcon = productDetailBtn.querySelector('img');
         const productDetailBtnSpan = productDetailBtn.querySelector('span');
 
         if (isProductAddedToCart) {
-            // ADD STYLES FOR PRODUCT CARD BUTTON
-            productCardBtnIcon.src = 'assets/icons/bt_added_to_cart.svg';
-            productCardBtnIcon.style.transform = 'scale(1.3)';
-
-            // ADD STYLES FOR PRODUCT DETAIL BUTTON
+            // ADD STYLES FOR PRODUCT DETAIL BTN
             productDetailBtn.style.backgroundColor = 'var(--white)';
             productDetailBtn.style.color = 'var(--hospital-green)';
             productDetailBtn.style.border = '1px solid var(--hospital-green)';
@@ -231,11 +222,7 @@ function updateStyles(item) {
 
             productDetailBtnSpan.innerText = 'Added to cart';
         } else {
-            // REMOVE STYLES FOR PRODUCT CARD BUTTON
-            productCardBtnIcon.src = 'assets/icons/bt_add_to_cart.svg';
-            productCardBtnIcon.style.transform = 'none';
-
-            // ADD STYLES FOR PRODUCT DETAIL BUTTON
+            // REMOVE STYLES FOR PRODUCT DETAIL BTN
             productDetailBtn.style.backgroundColor = 'var(--hospital-green)';
             productDetailBtn.style.color = 'var(--white)';
             productDetailBtn.style.border = 'none';
@@ -245,6 +232,26 @@ function updateStyles(item) {
             productDetailBtnIcon.style.filter = 'none';
 
             productDetailBtnSpan.innerText = 'Add to cart';
+        }
+
+        // Updating Styles for product card btn when clicking product detail btn
+        const productCard = document.querySelector(`div[data-id="${item.id}"`);
+        const productCardBtn = productCard.querySelector('button');
+
+        updateAddToCartBtnStyles(item, productCardBtn);
+    } else {
+        // PRODUCT CARD BUTTON VARIABLES
+        const productCardBtn = btn;
+        const productCardBtnIcon = productCardBtn.querySelector('img');
+
+        if (isProductAddedToCart) {
+            // ADD STYLES FOR PRODUCT CARD BUTTON
+            productCardBtnIcon.src = 'assets/icons/bt_added_to_cart.svg';
+            productCardBtnIcon.style.transform = 'scale(1.3)';
+        } else {
+            // REMOVE STYLES FOR PRODUCT CARD BUTTON
+            productCardBtnIcon.src = 'assets/icons/bt_add_to_cart.svg';
+            productCardBtnIcon.style.transform = 'none';
         }
     }
 }
@@ -338,32 +345,10 @@ function renderCurrentItemDetails(e) {
     const itemDescription = document.querySelector('#item-description');
     itemDescription.innerText = currentItem.description;
 
-    const isCurrentItemAddedToCart = currentItem.state;
+    const productDetailBtn = productDetail.querySelector('button');
+    productDetailBtn.setAttribute('data-id', itemId);
 
-    const currentBtn = productDetail.querySelector('button');
-    currentBtn.setAttribute('data-id', itemId);
-
-    updateStyles(currentItem);
-
-    // FALTA ARREGLAR (actualizar contador y carrito de productos)
-
-    // currentBtn.addEventListener('click', function () {
-    //     currentBtn.classList.toggle('--product-added');
-    // });
-
-    // const btnIcon = currentBtn.querySelector('img');
-    // const btnText = currentBtn.querySelector('span');
-
-    // if (isCurrentItemAddedToCart) {
-    //     currentBtn.classList.add('--product-added');
-    //     btnText.innerText = 'Added to cart';
-    //     btnIcon.src = 'assets/icons/bt_added_to_cart.svg';
-    // } else {
-    //     currentBtn.classList.remove('--product-added');
-    //     btnText.innerText = 'Add to cart';
-    //     btnIcon.src = 'assets/icons/bt_add_to_cart.svg';
-    // }
-
+    updateAddToCartBtnStyles(currentItem, productDetailBtn);
     clearSlider();
     renderSlider(currentItem);
     verticallyResizeMainContainer();
@@ -517,11 +502,36 @@ function renderCategoryButtons() {
 
                 if (category === 'all') {
                     renderProducts(productList);
+
+                    // Updating styles for products added to cart
+                    productList.forEach((product) => {
+                        const productCardBtn = document.querySelector(
+                            `button[data-id="${product.id}"`
+                        );
+
+                        updateAddToCartBtnStyles(product, productCardBtn);
+                    });
                 } else {
                     renderProducts(productsByCategory);
+
+                    // Updating styles for products added to cart
+                    productsByCategory.forEach((product) => {
+                        const productCardBtn = document.querySelector(
+                            `button[data-id="${product.id}"`
+                        );
+                        updateAddToCartBtnStyles(product, productCardBtn);
+                    });
                 }
 
                 toggleActiveBtn(currentBtn, arr);
+
+                // Clossing Product Detail if it is opened
+                const isProductDetailOpened =
+                    !productDetail.classList.contains('inactive');
+
+                if (isProductDetailOpened) {
+                    productDetail.classList.add('inactive');
+                }
 
                 // Checking if mobile menu is opened to close components when clicking a filter button
                 const isMobileMenuOpened =
