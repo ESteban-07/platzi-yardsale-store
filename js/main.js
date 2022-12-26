@@ -340,7 +340,27 @@ function renderCartItems(itemsArray) {
     const deleteItemsFromCartBtns = document.querySelectorAll('.delete-item');
 
     deleteItemsFromCartBtns.forEach((btn) => {
-        btn.addEventListener('click', toggleAddToCartBtn);
+      btn.addEventListener('click', (e) => {
+        try {
+          toggleAddToCartBtn(e);
+        } catch (error) {
+          // HANDLING ERROR
+          const itemID = e.currentTarget.dataset.id;
+
+          const currentItem = productList.find((product) => {
+            return product.id == itemID;
+          });
+
+          // UPDATE CURRENT ITEM STATE TO FALSE
+          updateState(currentItem);
+
+          // DELETE ITEM FROM CART TOTAL
+          removeItemFromCart(currentItem, cartItemsArray);
+
+          // RE-RENDER CART-ITEMS
+          renderCartItems(cartItemsArray);
+        }
+      });
     });
 }
 
@@ -531,24 +551,11 @@ function renderCategoryButtons() {
                 if (category === 'all') {
                     renderProducts(productList);
 
-                    // Updating styles for products added to cart
-                    productList.forEach((product) => {
-                        const productCardBtn = document.querySelector(
-                            `button[data-id="${product.id}"`
-                        );
-
-                        updateAddToCartBtnStyles(product, productCardBtn);
-                    });
+                    keepCartButtonsState(productList);
                 } else {
                     renderProducts(productsByCategory);
 
-                    // Updating styles for products added to cart
-                    productsByCategory.forEach((product) => {
-                        const productCardBtn = document.querySelector(
-                            `button[data-id="${product.id}"`
-                        );
-                        updateAddToCartBtnStyles(product, productCardBtn);
-                    });
+                    keepCartButtonsState(productsByCategory);
                 }
 
                 toggleActiveBtn(currentBtn, arr);
@@ -578,6 +585,20 @@ function renderCategoryButtons() {
 
         // First button active by default
         filterBtns[0].classList.add('--active-btn');
+    });
+}
+
+function keepCartButtonsState(array) {
+    array.forEach((product) => {
+        const productCard = document.querySelector(
+            `div[data-id="${product.id}"`
+        );
+
+        const productCardBtn = productCard.querySelector(
+            `button[data-id="${product.id}"`
+        );
+
+        updateAddToCartBtnStyles(product, productCardBtn);
     });
 }
 
