@@ -166,12 +166,13 @@ function renderProducts(products) {
 }
 
 function toggleAddToCartBtn(e) {
-    const productCardBtn = e.currentTarget;
+    const itemID = e.currentTarget.dataset.id;
 
-    const itemId = e.currentTarget.dataset.id;
+    const productCard = document.querySelector(`div[data-id="${itemID}"`);
+    const productCardBtn = productCard.querySelector('button');
 
     const currentItem = productList.find((product) => {
-        return product.id == itemId;
+        return product.id == itemID;
     });
 
     updateState(currentItem);
@@ -323,11 +324,11 @@ function renderCartItems(itemsArray) {
 
             <div>
                 <p class="item-price">${item.price}</p>
-                <img 
-                src="./assets/icons/icon_close.png" 
-                alt="Delete ${item.name} from cart" 
-                class="delete-item" 
-                />
+                <button class="delete-item" data-id="${item.id}">
+                    <img 
+                        src="./assets/icons/icon_close.png" 
+                        alt="Delete ${item.name} from cart"
+                </button>
             </div>
         </div>
         `;
@@ -335,6 +336,12 @@ function renderCartItems(itemsArray) {
         .join('');
 
     cartItemsContainer.innerHTML = cartItems;
+
+    const deleteItemsFromCartBtns = document.querySelectorAll('.delete-item');
+
+    deleteItemsFromCartBtns.forEach((btn) => {
+        btn.addEventListener('click', toggleAddToCartBtn);
+    });
 }
 
 function alertNotification(isAddedToCart) {
@@ -351,10 +358,10 @@ function alertNotification(isAddedToCart) {
 function renderCurrentItemDetails(e) {
     toggleProductDetail(e);
 
-    const itemId = e.currentTarget.dataset.id;
+    const itemID = e.currentTarget.dataset.id;
 
     const currentItem = productList.find((product) => {
-        return product.id == itemId;
+        return product.id == itemID;
     });
 
     const itemPrice = document.querySelector('#item-price');
@@ -367,7 +374,7 @@ function renderCurrentItemDetails(e) {
     itemDescription.innerText = currentItem.description;
 
     const productDetailBtn = productDetail.querySelector('button');
-    productDetailBtn.setAttribute('data-id', itemId);
+    productDetailBtn.setAttribute('data-id', itemID);
 
     updateAddToCartBtnStyles(currentItem, productDetailBtn);
     clearSlider();

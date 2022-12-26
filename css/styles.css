@@ -332,6 +332,8 @@ nav {
     font-weight: bold;
 }
 .cart-item div .delete-item {
+    background-color: transparent;
+    border: none;
     cursor: pointer;
 }
 .total-payment {
