@@ -310,6 +310,17 @@ function updateCartItemsCounter(expression) {
 }
 
 function renderCartItems(itemsArray) {
+  if (itemsArray.length === 0) {
+    const emptyCartIcon = `
+    <img
+    class="empty-cart-icon" 
+    src="./assets/icons/icon_shopping_cart.svg" 
+    alt="empty shopping cart" />
+    `;
+
+    return (cartItemsContainer.innerHTML = emptyCartIcon);
+  }
+
     const cartItems = itemsArray
         .map((item) => {
             return `

@@ -302,6 +302,13 @@ nav {
     scrollbar-width: none; /* Firefox */
 }
 
+.cart-items .empty-cart-icon {
+  width: 80%;
+  aspect-ratio: 1;
+  filter: invert(88%) sepia(10%) saturate(779%) hue-rotate(77deg)
+    brightness(95%) contrast(85%);
+}
+
 .cart-item {
     display: flex;
     justify-content: space-between;
