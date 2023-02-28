@@ -44,7 +44,7 @@ const formatter = new Intl.NumberFormat('en-US', {
   currency: 'USD',
 });
 
-window.addEventListener('DOMContentLoaded',async function () {
+window.addEventListener('DOMContentLoaded', async function () {
   await fetchProductsJSON();
 
   renderCategoryButtons();

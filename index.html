@@ -1,171 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&family=Roboto:wght@700&display=swap"
-            rel="stylesheet"
-        />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&family=Roboto:wght@700&display=swap"
+      rel="stylesheet"
+    />
 
-        <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/styles.css" />
 
-        <title>Platzi YardSale</title>
-    </head>
-    <body>
-        <nav>
+    <title>Platzi YardSale</title>
+  </head>
+  <body>
+    <nav>
+      <img
+        src="./assets/icons/icon_menu.svg"
+        alt="burguer menu"
+        class="burguer-menu"
+      />
+
+      <div class="navbar-left">
+        <div class="logo-title">
+          <img
+            src="./assets/logos/logo_yard_sale.svg"
+            alt="logo"
+            class="logo"
+          />
+          <h1 class="title inactive" id="shopping-title">Shopping cart</h1>
+        </div>
+        <ul class="btn-container"></ul>
+      </div>
+
+      <div class="navbar-right">
+        <ul>
+          <li class="navbar-email">
+            platzi@example.com
+            <span>
+              <img
+                src="./assets/icons/flechita.svg"
+                alt="arrow-down"
+                class="arrow-down"
+              />
+            </span>
+          </li>
+          <li class="navbar-shopping-cart">
             <img
-                src="./assets/icons/icon_menu.svg"
-                alt="burguer menu"
-                class="burguer-menu"
+              src="./assets/icons/icon_shopping_cart.svg"
+              alt="shopping cart"
             />
+            <div class="cart">0</div>
+          </li>
+        </ul>
+      </div>
 
-            <div class="navbar-left">
-                <div class="logo-title">
-                    <img
-                        src="./assets/logos/logo_yard_sale.svg"
-                        alt="logo"
-                        class="logo"
-                    />
-                    <h1 class="title inactive" id="shopping-title">
-                        Shopping cart
-                    </h1>
-                </div>
-                <ul class="btn-container"></ul>
-            </div>
+      <div class="desktop-menu inactive">
+        <ul>
+          <li>
+            <a>My orders</a>
+          </li>
+          <li>
+            <a>My account</a>
+          </li>
+          <li>
+            <a>Sign out</a>
+          </li>
+        </ul>
+      </div>
 
-            <div class="navbar-right">
-                <ul>
-                    <li class="navbar-email">
-                        platzi@example.com
-                        <span>
-                            <img
-                                src="./assets/icons/flechita.svg"
-                                alt="arrow-down"
-                                class="arrow-down"
-                            />
-                        </span>
-                    </li>
-                    <li class="navbar-shopping-cart">
-                        <img
-                            src="./assets/icons/icon_shopping_cart.svg"
-                            alt="shopping cart"
-                        />
-                        <div class="cart">0</div>
-                    </li>
-                </ul>
-            </div>
+      <div class="mobile-menu inactive">
+        <figure id="close-button">
+          <img src="./assets/icons/icon_close.png" alt="close mobile menu" />
+        </figure>
 
-            <div class="desktop-menu inactive">
-                <ul>
-                    <li>
-                        <a>My orders</a>
-                    </li>
-                    <li>
-                        <a>My account</a>
-                    </li>
-                    <li>
-                        <a>Sign out</a>
-                    </li>
-                </ul>
-            </div>
+        <div>
+          <ul>
+            <li>
+              <h2 class="title-categories">Categories</h2>
+            </li>
+          </ul>
+          <ul class="btn-container"></ul>
+          <ul>
+            <li><hr class="line-division" /></li>
+          </ul>
+          <ul>
+            <li><a>My orders</a></li>
+            <li><a>My account</a></li>
+          </ul>
+          <ul>
+            <li>
+              <a class="email">platzi@example.com</a>
+            </li>
+            <li>
+              <a class="sign-out">Sign out</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-            <div class="mobile-menu inactive">
-                <figure id="close-button">
-                    <img
-                        src="./assets/icons/icon_close.png"
-                        alt="close mobile menu"
-                    />
-                </figure>
+    <aside class="shopping-cart inactive">
+      <div class="shopping-cart-container">
+        <h1 class="title">
+          <span>
+            <img
+              src="./assets/icons/flechita.svg"
+              alt="exit shopping cart"
+              class="back-arrow"
+            />
+          </span>
+          Shopping cart
+        </h1>
 
-                <div>
-                    <ul>
-                        <li>
-                            <h2 class="title-categories">Categories</h2>
-                        </li>
-                    </ul>
-                    <ul class="btn-container"></ul>
-                    <ul>
-                        <li><hr class="line-division" /></li>
-                    </ul>
-                    <ul>
-                        <li><a>My orders</a></li>
-                        <li><a>My account</a></li>
-                    </ul>
-                    <ul>
-                        <li>
-                            <a class="email">platzi@example.com</a>
-                        </li>
-                        <li>
-                            <a class="sign-out">Sign out</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <div class="cart-items">
+          <img
+            class="empty-cart-icon"
+            src="./assets/icons/icon_shopping_cart.svg"
+            alt="empty shopping cart"
+          />
+        </div>
 
-        <aside class="shopping-cart inactive">
-            <div class="shopping-cart-container">
-                <h1 class="title">
-                    <span>
-                        <img
-                            src="./assets/icons/flechita.svg"
-                            alt="exit shopping cart"
-                            class="back-arrow"
-                        />
-                    </span>
-                    Shopping cart
-                </h1>
+        <div class="total-payment">
+          <div class="total">
+            <p>Total</p>
+            <p id="payment">$ 0.00</p>
+          </div>
 
-                <div class="cart-items">
-                  <img
-                  class="empty-cart-icon" 
-                  src="./assets/icons/icon_shopping_cart.svg" 
-                  alt="empty shopping cart" />
-                </div>
+          <button class="primary-button --checkout-button">Checkout</button>
+        </div>
+      </div>
+    </aside>
 
-                <div class="total-payment">
-                    <div class="total">
-                        <p>Total</p>
-                        <p id="payment">$ 0.00</p>
-                    </div>
+    <aside class="product-detail inactive">
+      <div class="product-detail-close">
+        <img src="./assets/icons/icon_close.png" alt="close" />
+      </div>
 
-                    <button class="primary-button --checkout-button">
-                        Checkout
-                    </button>
-                </div>
-            </div>
-        </aside>
+      <div class="slider"></div>
 
-        <aside class="product-detail inactive">
-            <div class="product-detail-close">
-                <img src="./assets/icons/icon_close.png" alt="close" />
-            </div>
+      <div class="item-details">
+        <p id="item-price"></p>
+        <p id="item-name"></p>
+        <p id="item-description"></p>
+        <button class="primary-button add-to-cart-btn">
+          <img src="./assets/icons/bt_add_to_cart.svg" alt="add to cart" />
+          <span>Add to cart</span>
+        </button>
+      </div>
+    </aside>
 
-            <div class="slider"></div>
+    <section class="main-container">
+      <div class="cards-container"></div>
+    </section>
 
-            <div class="item-details">
-                <p id="item-price"></p>
-                <p id="item-name"></p>
-                <p id="item-description"></p>
-                <button class="primary-button add-to-cart-btn">
-                    <img
-                        src="./assets/icons/bt_add_to_cart.svg"
-                        alt="add to cart"
-                    />
-                    <span>Add to cart</span>
-                </button>
-            </div>
-        </aside>
-
-        <section class="main-container">
-            <div class="cards-container"></div>
-        </section>
-
-        <script src="./js/main.js"></script>
-    </body>
+    <script src="./js/main.js"></script>
+  </body>
 </html>
