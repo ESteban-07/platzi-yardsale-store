@@ -25,18 +25,23 @@ const productDetailCloseBtn = document.querySelector('.product-detail-close');
 const slider = document.querySelector('.slider');
 
 const cartItemsContainer = document.querySelector('.cart-items');
-const cartItemsArray = [];
-const cart = document.querySelector('.cart');
-let cartValue = parseInt(cart.innerText);
 
-const productList = [];
+let cartItemsArray = JSON.parse(localStorage.getItem('cartItemsArray')) || [];
+
+const cart = document.querySelector('.cart');
+
+let cartValue = JSON.parse(localStorage.getItem('cartValue')) || 0;
+
+let productList = [];
 
 async function fetchProductsJSON() {
-  const response = await fetch('/src/data/products.json');
-  const products = await response.json();
-  products.forEach((product) => {
-    productList.push(product);
-  });
+  try {
+    const response = await fetch('/src/data/products.json');
+    const products = await response.json();
+    return products;
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 const formatter = new Intl.NumberFormat('en-US', {
@@ -44,11 +49,25 @@ const formatter = new Intl.NumberFormat('en-US', {
   currency: 'USD',
 });
 
-window.addEventListener('DOMContentLoaded', async function () {
-  await fetchProductsJSON();
+const payment = document.querySelector('#payment');
 
-  renderCategoryButtons();
+payment.innerHTML = formatter.format(
+  JSON.parse(localStorage.getItem('totalPayment')) || 0
+);
+
+window.addEventListener('load', async function () {
+  productList =
+    JSON.parse(localStorage.getItem('productList')) ||
+    (await fetchProductsJSON());
+
+  renderCategoryButtons(productList);
+
+  // working on local storage...
   renderProducts(productList);
+
+  renderCartItems();
+
+  cart.innerHTML = cartValue;
 });
 
 navbarEmail.addEventListener('click', toggleDesktopMenu);
@@ -152,7 +171,16 @@ function renderProducts(products) {
                     </div>
                     <button class="add-to-cart-btn" data-id=${product.id}>
                         <img 
-                        src="./src/assets/icons/bt_add_to_cart.svg" 
+                        src=${
+                          product.state
+                            ? './src/assets/icons/bt_added_to_cart.svg'
+                            : './src/assets/icons/bt_add_to_cart.svg'
+                        }
+                        style=${
+                          product.state
+                            ? `"transform: scale(1.3);"`
+                            : `"transform: none;"`
+                        }
                         alt="Add ${product.name} to cart" 
                         />
                     </button>
@@ -192,14 +220,12 @@ function toggleAddToCartBtn(e) {
     return product.id == itemID;
   });
 
-  updateState(currentItem);
-
-  const isProductAddedToCart = currentItem.state;
+  const isProductAddedToCart = updateState(currentItem);
 
   if (isProductAddedToCart) {
-    addItemToCart(currentItem, cartItemsArray);
+    addItemToCart(currentItem);
   } else {
-    removeItemFromCart(currentItem, cartItemsArray);
+    removeItemFromCart(currentItem);
   }
 
   updateAddToCartBtnStyles(currentItem, productCardBtn);
@@ -214,7 +240,10 @@ function toggleAddToCartBtn(e) {
   }
 
   alertNotification(isProductAddedToCart);
-  renderCartItems(cartItemsArray);
+  renderCartItems();
+
+  // adding cartItemsArray to localStorage
+  localStorage.setItem('cartItemsArray', JSON.stringify(cartItemsArray));
 }
 
 // FALTA AGREGAR ESTILOS
@@ -276,32 +305,33 @@ function updateAddToCartBtnStyles(item, btn) {
 
 function updateState(item) {
   // Toggling boolean expression
-  return (item.state = !item.state);
+  item.state = !item.state;
+
+  // console.log('productList', productList);
+  // adding productList to local storage
+  localStorage.setItem('productList', JSON.stringify(productList));
+
+  return item.state;
 }
 
-function addItemToCart(item, array) {
+function addItemToCart(item) {
   updateCartItemsCounter('increase');
   updateTotalPayment(item, 'sum');
-
-  const itemAdded = array.push(item);
-
-  return itemAdded;
+  cartItemsArray.push(item);
 }
 
-function removeItemFromCart(item, array) {
+function removeItemFromCart(item) {
   updateCartItemsCounter('decrease');
   updateTotalPayment(item, 'rest');
 
-  const index = array.indexOf(item);
-
-  const itemRemoved = array.splice(index, 1);
-
-  return itemRemoved;
+  cartItemsArray = cartItemsArray.filter((product) => product.id !== item.id);
 }
 
 function updateTotalPayment(item, operation) {
-  const total = document.querySelector('#payment');
-  let totalPayment = undoFormmattedPrice(total.innerText);
+  let totalPayment =
+    JSON.parse(localStorage.getItem('totalPayment')) ||
+    undoFormmattedPrice(payment.innerText);
+
   let price = undoFormmattedPrice(item.price);
 
   if (operation == 'sum') {
@@ -310,7 +340,10 @@ function updateTotalPayment(item, operation) {
     totalPayment -= price;
   }
 
-  total.innerText = formatter.format(totalPayment);
+  // adding totalPayment to localStorage
+  localStorage.setItem('totalPayment', totalPayment);
+
+  payment.innerText = formatter.format(totalPayment);
 }
 
 function undoFormmattedPrice(price) {
@@ -324,10 +357,12 @@ function updateCartItemsCounter(expression) {
   } else if (expression == 'decrease') {
     cart.innerText = --cartValue;
   }
+  // adding cartValue to localStorage
+  localStorage.setItem('cartValue', JSON.stringify(cartValue));
 }
 
-function renderCartItems(itemsArray) {
-  if (itemsArray.length === 0) {
+function renderCartItems() {
+  if (cartItemsArray.length === 0) {
     const emptyCartIcon = `
     <img
     class="empty-cart-icon" 
@@ -338,7 +373,7 @@ function renderCartItems(itemsArray) {
     return (cartItemsContainer.innerHTML = emptyCartIcon);
   }
 
-  const cartItems = itemsArray
+  const cartItems = cartItemsArray
     .map((item) => {
       return `
         <div class="cart-item">
@@ -383,10 +418,10 @@ function renderCartItems(itemsArray) {
         updateState(currentItem);
 
         // DELETE ITEM FROM CART TOTAL
-        removeItemFromCart(currentItem, cartItemsArray);
+        removeItemFromCart(currentItem);
 
         // RE-RENDER CART-ITEMS
-        renderCartItems(cartItemsArray);
+        renderCartItems();
       }
     });
   });
@@ -540,7 +575,7 @@ function resizeSlideImageX() {
   }
 }
 
-function renderCategoryButtons() {
+function renderCategoryButtons(productList) {
   const btnContainer = document.querySelectorAll('.btn-container');
 
   btnContainer.forEach((btnContainer) => {
