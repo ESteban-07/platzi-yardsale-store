@@ -32,7 +32,7 @@ let cartValue = parseInt(cart.innerText);
 const productList = [];
 
 async function fetchProductsJSON() {
-  const response = await fetch('/data/products.json');
+  const response = await fetch('/src/data/products.json');
   const products = await response.json();
   products.forEach((product) => {
     productList.push(product);
@@ -152,7 +152,7 @@ function renderProducts(products) {
                     </div>
                     <button class="add-to-cart-btn" data-id=${product.id}>
                         <img 
-                        src="./assets/icons/bt_add_to_cart.svg" 
+                        src="./src/assets/icons/bt_add_to_cart.svg" 
                         alt="Add ${product.name} to cart" 
                         />
                     </button>
@@ -234,7 +234,7 @@ function updateAddToCartBtnStyles(item, btn) {
       productDetailBtn.style.color = 'var(--hospital-green)';
       productDetailBtn.style.border = '1px solid var(--hospital-green)';
 
-      productDetailBtnIcon.src = 'assets/icons/bt_added_to_cart.svg';
+      productDetailBtnIcon.src = './src/assets/icons/bt_added_to_cart.svg';
       productDetailBtnIcon.style.transform = 'none';
       productDetailBtnIcon.style.filter = 'none';
 
@@ -245,7 +245,7 @@ function updateAddToCartBtnStyles(item, btn) {
       productDetailBtn.style.color = 'var(--white)';
       productDetailBtn.style.border = 'none';
 
-      productDetailBtnIcon.src = 'assets/icons/bt_add_to_cart.svg';
+      productDetailBtnIcon.src = './src/assets/icons/bt_add_to_cart.svg';
       productDetailBtnIcon.style.transform = 'none';
       productDetailBtnIcon.style.filter = 'none';
 
@@ -264,11 +264,11 @@ function updateAddToCartBtnStyles(item, btn) {
 
     if (isProductAddedToCart) {
       // ADD STYLES FOR PRODUCT CARD BUTTON
-      productCardBtnIcon.src = 'assets/icons/bt_added_to_cart.svg';
+      productCardBtnIcon.src = './src/assets/icons/bt_added_to_cart.svg';
       productCardBtnIcon.style.transform = 'scale(1.3)';
     } else {
       // REMOVE STYLES FOR PRODUCT CARD BUTTON
-      productCardBtnIcon.src = 'assets/icons/bt_add_to_cart.svg';
+      productCardBtnIcon.src = './src/assets/icons/bt_add_to_cart.svg';
       productCardBtnIcon.style.transform = 'none';
     }
   }
@@ -331,7 +331,7 @@ function renderCartItems(itemsArray) {
     const emptyCartIcon = `
     <img
     class="empty-cart-icon" 
-    src="./assets/icons/icon_shopping_cart.svg" 
+    src="./src/assets/icons/icon_shopping_cart.svg" 
     alt="empty shopping cart" />
     `;
 
@@ -354,7 +354,7 @@ function renderCartItems(itemsArray) {
                 <p class="item-price">${item.price}</p>
                 <button class="delete-item" data-id="${item.id}">
                     <img 
-                        src="./assets/icons/icon_close.png" 
+                        src="./src/assets/icons/icon_close.png" 
                         alt="Delete ${item.name} from cart"
                 </button>
             </div>
