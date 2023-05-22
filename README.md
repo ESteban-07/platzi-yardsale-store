@@ -14,7 +14,7 @@ A lo largo del desarrollo del proyecto pude aprender y poner en práctica los si
 - Manipulación de Arrays y Objetos
 - Fetching de datos através del servidor local
 - Almacenamiento y recuperación de data utilizando Local Storage
-- Despliegue de una aplicación web
+- Despliegue de una aplicación web utilizando Netlify
 
 ------------
 
